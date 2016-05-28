@@ -7,6 +7,8 @@
               overload operator /(Complex num1, Complex num2);
               get ~之類的
               
-劉仲凱:我的部分是實數的加減乘除，實數的分子分母型態是bigint
+劉仲凱:我的部分是實數的加減乘除、== 、<<，實數的分子分母型態都是bigint
+
+      
 
 江宗祐:Define a member function "factorial" to calculate the factorial of the calling big integer.
