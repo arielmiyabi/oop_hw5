@@ -1,18 +1,18 @@
 #include <iostream>
 using namespace std;
 
-class ComplexNum
+class Complex
 {
 public:
-    ComplexNum();
-    ComplexNum(int realNum);
-    ComplexNum(int imaginaryNum);
-    ComplexNum(int realNum, int imaginaryNum);
-    int getRealNum();
-    int getImaginaryNum();
-    friend istream& operator >>(istream input, ComplexNum& num);
-    friend ostream& operator <<(ostream output, const ComplexNum& num);
+    Complex();
+    //ComplexNum(int realNum);
+    Complex(int newImaginaryNum);
+    Complex(int newRealNum, int newImaginaryNum);
+    int getRealNum() const;
+    int getImaginaryNum() const;
+    friend istream& operator >>(istream& input, Complex& num);
+    friend ostream& operator <<(ostream& output, const Complex& num);
 private:
     int realNum;
-    int imaginaryNum
+    int imaginaryNum;
 };
