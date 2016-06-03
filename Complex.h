@@ -1,10 +1,10 @@
 #include <iostream>
-#include "Rational.h"
-
 using namespace std;
 
-namespace ComplexNumber
-{
+#ifndef Complex_H
+#define Complex_H
+#include "Rational.h"
+
 class Complex
 {
 public:
@@ -18,11 +18,12 @@ public:
     friend const Complex operator -(const Complex&num1, const Complex&num2);
     friend const Complex operator *(const Complex&num1, const Complex&num2);
     friend const Complex operator /(const Complex&num1, const Complex&num2);
+    //Complex& Complex::operator =(const Complex&rightValue);
     friend const Complex operator -(const Complex&num1);
-    friend istream& operator >>(istream& input, Complex& num);
+    //friend istream& operator >>(istream& input, Complex& num);
     friend ostream& operator <<(ostream& output, const Complex& num);
 private:
     Rational realNum;
     Rational imaginaryNum;
 };
-}
+#endif
