@@ -1,9 +1,8 @@
 #include <iostream>
 #include "Complex.h"
+#include "Rational.h"
 using namespace std;
 
-namespace ComplexNumber
-{
 Complex::Complex()
 {
     realNum=0;
@@ -56,21 +55,31 @@ const Complex operator /(const Complex&num1, const Complex&num2)
     answer.imaginaryNum=(num1.realNum*num1.imaginaryNum+num2.realNum*num2.imaginaryNum)/(num2.realNum*num2.realNum+num2.imaginaryNum*num2.imaginaryNum);
     return answer;
 }
+
+/*Complex& Complex::operator =(const Complex&rightValue)
+{
+    realNum=rightValue.realNum;
+    imaginaryNum=rightValue.imaginaryNum;
+    return *this;
+}
+*/
 const Complex operator -(const Complex&num1)
 {
-
+    return num1;
 }
-istream& operator >>(istream& input, Complex& num)
+/*istream& operator >>(istream& input, Complex& num)
 {
     Rational inputNum;
     istream >>inputNum;
     num.realNum=0;
     num.imaginaryNum=0;
     return input;
-}
-ostream& operator <<(ostream& output, const Complex& num)
+}*/
+
+ostream& operator <<(ostream& out, const Complex& num)
 {
-    output << num.realNum <<" + "<< num.imaginaryNum <<"i";
-    return output;
+
+    out << num.realNum <<" + "<< num.imaginaryNum <<"i"<<endl;
+    return out;
 }
-}
+
