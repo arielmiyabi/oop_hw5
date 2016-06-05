@@ -17,6 +17,14 @@ namespace BigInt_Yo
         return outputstream;
     }
 
+    istream& operator >>(istream& inputstream, BigInt& a)
+    {
+        string bigint;
+        inputstream >> bigint;
+        a = BigInt(bigint);
+        return inputstream;
+    }
+
     BigInt::BigInt()
     {
         bigInteger = NULL;
@@ -98,6 +106,16 @@ namespace BigInt_Yo
         return bigInteger;
     }
 
+    /*int& Rational::operator [](int a)
+    {
+        if(a==0) return numerator;
+        else if(a==1) return denominator;
+        else{
+            cout << "Illegal index." << endl;
+            exit(1);
+        }
+    }*/
+
     bool operator !=(const BigInt& a, const BigInt& b)
     {
         BigInt cpy_a(a), cpy_b(b);
@@ -169,7 +187,7 @@ namespace BigInt_Yo
     const BigInt operator %(const BigInt &a, const BigInt &b)
     {
         BigInt zero(0);
-        if(b==zero) return BigInt("error.");
+        if(b==zero) exit(0);
         BigInt q = a/b, r;
         r = a-(q*b);
         return BigInt(r);
@@ -178,7 +196,7 @@ namespace BigInt_Yo
     const BigInt operator /(const BigInt &a, const BigInt &b)
     {
         BigInt zero(0);
-        if(b==zero) return BigInt("error.");
+        if(b==zero) exit(0);
         BigInt result(0);
         int j, bit;
         BigInt cpy_a(a), cpy_b(b);
@@ -317,6 +335,7 @@ namespace BigInt_Yo
     const BigInt operator +(const BigInt &a, const BigInt &b)
     {
         BigInt cpy_a(a), cpy_b(b);
+        if(cpy_a==BigInt(0)&&cpy_b==BigInt(0)) return BigInt(0);
         int m, n, maxLength = (cpy_a.getLength()>=cpy_b.getLength()?cpy_a.getLength():cpy_b.getLength());
         char *cpyNumber, *addNumber;
         addNumber = new char[maxLength+2];
