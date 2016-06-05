@@ -4,7 +4,9 @@ using namespace std;
 #ifndef Complex_H
 #define Complex_H
 #include "Rational.h"
-
+using namespace Rational_Kai;
+namespace Complex_Hsuan
+{
 class Complex
 {
 public:
@@ -26,4 +28,5 @@ private:
     Rational realNum;
     Rational imaginaryNum;
 };
+}
 #endif
