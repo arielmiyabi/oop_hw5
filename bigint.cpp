@@ -327,6 +327,12 @@ namespace BigInt_Yo
         {
             multiNumber[m++] = multi[n]+'0';
         }
+        delete [] multi;
+        delete [] cpya;
+        delete [] cpyb;
+        multi = NULL;
+        cpya = NULL;
+        cpyb = NULL;
         multiNumber[m] = '\0';
         string returnNumber = multiNumber;
         return BigInt(returnNumber);
@@ -400,6 +406,10 @@ namespace BigInt_Yo
         {
             adderNumber[m++] = addNumber[n];
         }
+        delete [] addNumber;
+        delete [] cpyNumber;
+        addNumber = NULL;
+        cpyNumber = NULL;
         adderNumber[m] = '\0';
         string returnNumber = adderNumber;
         return BigInt(returnNumber);
@@ -461,6 +471,10 @@ namespace BigInt_Yo
             {
                 minuserNumber[m++] = minusNumber[n];
             }
+            delete [] minusNumber;
+            delete [] cpyNumber;
+            minusNumber = NULL;
+            cpyNumber = NULL;
             minuserNumber[m] = '\0';
             string returnNumber = minuserNumber;
             return BigInt(returnNumber);
@@ -500,6 +514,10 @@ namespace BigInt_Yo
             {
                 minuserNumber[m++] = minusNumber[n];
             }
+            delete [] minusNumber;
+            delete [] cpyNumber;
+            minusNumber = NULL;
+            cpyNumber = NULL;
             minuserNumber[m] = '\0';
             string returnNumber = minuserNumber;
             return BigInt(returnNumber);
