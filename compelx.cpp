@@ -2,6 +2,9 @@
 #include "Complex.h"
 #include "Rational.h"
 using namespace std;
+using namespace Rational_Kai;
+namespace Complex_Hsuan
+{
 
 Complex::Complex()
 {
@@ -82,4 +85,4 @@ ostream& operator <<(ostream& out, const Complex& num)
     out << num.realNum <<" + "<< num.imaginaryNum <<"i"<<endl;
     return out;
 }
-
+}
