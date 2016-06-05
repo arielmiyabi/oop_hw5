@@ -38,6 +38,8 @@ namespace BigInt_Yo
 
         char* getBigint();
 
+        //int& operator [](int a);
+
         BigInt& operator =(const BigInt &rtSide); //assignment overloading
         //precondition : rtSide is a BigInt type object.
         //postcondition : assign the object rtSide to calling object.
@@ -59,6 +61,8 @@ namespace BigInt_Yo
         friend ostream& operator <<(ostream& outputstream, const BigInt &a); //cout overloading
         //precondition : outputstream is a ostream type object. a is a BigInt type object.
         //postcondition : cout the bigInteger of a.
+
+        friend istream& operator >>(istream& inputstream, BigInt& a);
 
         friend const BigInt factorial(string factor);
 
