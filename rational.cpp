@@ -1,102 +1,39 @@
-/*************************/
-/*Information Engineering*/
-/*     second grade      */
-/*     Liu Chung kai     */
-/*       403410057       */
-/*************************/
 #include <iostream>
 #include <stdlib.h>
-#include "bigint.h"
 
+#include "bigint.h"
+#include "rational.h"
+
+using namespace BigInt_Yo;
 using namespace std;
 
-class  Rational
+
+namespace Rational_Kai
 {
-public:
-    Rational();
-    Rational(int numeratorvalue);
-    Rational(int numeratorvalue, int denominator);
-    int getnumerator() const;
-    int getdenominator() const;
-    friend istream &operator>>(istream &in,Rational &fraction);
-    friend ostream &operator<<(ostream &out,Rational &fraction);
-    friend const Rational operator *(const Rational& fraction1 , const Rational& fraction2);
-    friend const Rational operator /(const Rational& fraction1 , const Rational& fraction2);
-    friend const Rational operator ==(const Rational& fraction1 , const Rational& fraction2);
-    bool operator==(const Rational& fraction);
-    bool operator<(const Rational& fraction);
-    bool operator<=(const Rational& fraction);
-    bool operator>(const Rational& fraction);
-    bool operator>=(const Rational& fraction);
-    int& operator[](int index);
-private:
-    int numerator;
-    int denominator;
-};
-const Rational operator +(const Rational& fraction1 , const Rational& fraction2);
-const Rational operator -(const Rational& fraction1 , const Rational& fraction2);
-const Rational operator -(const Rational& fraction);
-
-int main()
-{
-    Rational fraction1,fraction2;
-    cin>>fraction1>>fraction2;
-    system("cls");
-    cout<<"result : \n"<<"First number = "<<fraction1<<"\nSecond number = "<<fraction2<<endl;
-    Rational fraction3;
-    fraction3=fraction1+fraction2;
-    cout<<fraction1<<"+ "<<fraction2<<"= "<<fraction3<<endl;
-    fraction3=fraction1-fraction2;
-    cout<<fraction1<<"- "<<fraction2<<"= "<<fraction3<<endl;
-    fraction3=fraction1*fraction2;
-    cout<<fraction1<<"* "<<fraction2<<"= "<<fraction3<<endl;
-    fraction3=fraction1/fraction2;
-    cout<<fraction1<<"/ "<<fraction2<<"= "<<fraction3<<endl;
-    fraction3=-fraction1;
-    cout<<"- ( "<<fraction1<<") = "<<fraction3<<endl;
-    fraction3=-fraction2;
-    cout<<"- ( "<<fraction2<<") = "<<fraction3<<endl<<endl;
-
-    bool x;
-    x=(fraction1==fraction2);
-    cout<<"If "<<fraction1<<"== "<<fraction2<<"?  "<<(x == 0 ? "False": "True")<<endl;
-    x=(fraction1<fraction2);
-    cout<<"If "<<fraction1<<"< "<<fraction2<<"?   "<<(x == 0 ? "False": "True")<<endl;
-    x=(fraction1<=fraction2);
-    cout<<"If "<<fraction1<<"<= "<<fraction2<<"?  "<<(x == 0 ? "False": "True")<<endl;
-    x=(fraction1>fraction2);
-    cout<<"If "<<fraction1<<"> "<<fraction2<<"?   "<<(x == 0 ? "False": "True")<<endl;
-    x=(fraction1>=fraction2);
-    cout<<"If "<<fraction1<<">= "<<fraction2<<"?  "<<(x == 0 ? "False": "True")<<endl;
-    cout<<fraction1<<"numerator [0] = "<<fraction1[0]<<"  denomination [1] = "<<fraction1[1]<<endl;
-    cout<<fraction2<<"numerator [0] = "<<fraction2[0]<<"  denomination [1] = "<<fraction2[1]<<endl;
-    return 0;
-}
-
 Rational::Rational()
 {
     numerator=0;
     denominator=1;
 }
-Rational::Rational(int integervalue)
+Rational::Rational(BigInt integervalue)
 {
     numerator=integervalue;
     denominator=1;
 }
-Rational::Rational(int numeratorvalue,int denominatorvalue)
+Rational::Rational(BigInt numeratorvalue,BigInt denominatorvalue)
 {
     numerator=numeratorvalue;
     denominator=denominatorvalue;
-    if((numerator>0&&denominator<0)||(numerator<0&&denominator<0))
+    /*if((numerator>0&&denominator<0)||(numerator<0&&denominator<0))
     {
-        numerator*=-1;
-        denominator*=-1;
-    }
+        numerator[0]*=-1;
+        denominator[0]*=-1;
+    }*/
 }
 
 const Rational operator +(const Rational& fraction1 , const Rational& fraction2)//addition
 {
-    int temp1_num,temp2_num,temp_den;
+    BigInt temp1_num,temp2_num,temp_den;
     if(fraction1.getdenominator() != fraction2.getdenominator())
     {
         temp1_num=fraction1.getnumerator()*fraction2.getdenominator();
@@ -109,13 +46,13 @@ const Rational operator +(const Rational& fraction1 , const Rational& fraction2)
         temp2_num=fraction2.getnumerator();
         temp_den=fraction1.getdenominator();
     }
-    int tempnum(temp1_num+temp2_num);
+    BigInt tempnum(temp1_num+temp2_num);
     return Rational(tempnum,temp_den);
 }
 
 const Rational operator -(const Rational& fraction1 , const Rational& fraction2)//subtraction
 {
-    int temp1_num,temp2_num,temp_den;
+    BigInt temp1_num,temp2_num,temp_den;
     if(fraction1.getdenominator() != fraction2.getdenominator())
     {
         temp1_num=fraction1.getnumerator()*fraction2.getdenominator();
@@ -129,20 +66,20 @@ const Rational operator -(const Rational& fraction1 , const Rational& fraction2)
         temp2_num=fraction2.getnumerator();
         temp_den=fraction1.getdenominator();
     }
-    int tempnum(temp1_num-temp2_num);
+    BigInt tempnum(temp1_num-temp2_num);
     return Rational(tempnum,temp_den);
 }
 
 const Rational operator -(const Rational& fraction)//negation
 {
-    int temp_num(fraction.getnumerator()*-1);
-    int temp_den(fraction.getdenominator());
+    BigInt temp_num(fraction.getnumerator()*-1);
+    BigInt temp_den(fraction.getdenominator());
     return Rational(temp_num,temp_den);
 }
 
 const Rational operator *(const Rational& fraction1 , const Rational& fraction2)//multiplication
 {
-    int temp_num,temp_den;
+    BigInt temp_num,temp_den;
     temp_num=fraction1.numerator*fraction2.numerator;
     temp_den=fraction1.denominator*fraction2.denominator;
     return Rational(temp_num,temp_den);
@@ -150,7 +87,7 @@ const Rational operator *(const Rational& fraction1 , const Rational& fraction2)
 
 const Rational operator /(const Rational& fraction1 , const Rational& fraction2)//division
 {
-    int temp_num,temp_den;
+    BigInt temp_num,temp_den;
     temp_num=fraction1.numerator*fraction2.denominator;
     temp_den=fraction1.denominator*fraction2.numerator;
     return Rational(temp_num,temp_den);
@@ -171,7 +108,7 @@ istream &operator>>(istream& in,Rational& fraction1)
         else if(choice==2)
         {
             cout<<"enter the numerator : \n";
-            int numeratorvalue,denominatorvalue;
+            BigInt numeratorvalue,denominatorvalue;
             in>>numeratorvalue;
             while(1)//denominator can't be 0
             {
@@ -188,7 +125,7 @@ istream &operator>>(istream& in,Rational& fraction1)
         else if(choice==3)
         {
             cout<<"enter the integer : \n";
-            int integervalue;
+            BigInt integervalue;
             in>>integervalue;
             fraction1=Rational(integervalue);
             break;
@@ -199,24 +136,34 @@ istream &operator>>(istream& in,Rational& fraction1)
     return in;
 }
 
-ostream &operator<<(ostream& out,Rational& fraction)//cout
+ostream &operator<<(ostream& out,const Rational& fraction)//cout
 {
-    for(int i=abs(fraction.numerator);i>1;i--)
+    BigInt temp,num1(fraction.numerator),num2(fraction.denominator);
+    BigInt answer;
+    /*if (num1<0)
+        num1*=-1;
+    if (num2<0)
+        num2*=-1;*/
+    //cout<<num1<<" "<<num2<<endl;
+    while (num1%num2!=0)
     {
-        if(fraction.denominator%i==0&&fraction.numerator%i==0)
-        {
-            fraction.numerator/=i;
-            fraction.denominator/=i;
-        }
+        temp=num1%num2;
+        num1=num2;
+        num2=temp;
+        //cout<<num1<<" "<<num2<<endl;
     }
-    if(fraction.denominator==0)
+    answer=num2;
+    //cout<<"gcd="<<num2<<endl;
+    num1=num1/answer;
+    num2=num2/answer;
+    if(num2==BigInt(0))
         out<<"error";
-    else if(fraction.denominator==1)
+    else if(num2==BigInt(1))
         out<<fraction.numerator<<" ";
-    else if(fraction.numerator==0)
+    else if(num1==BigInt(0))
         out<<"0 ";
     else
-        out<<fraction.numerator<<"/"<<fraction.denominator<<" ";
+    out<<num1<<"/"<<num2;
     return out;
 }
 
@@ -245,20 +192,22 @@ bool Rational::operator>=(const Rational& fraction)
     return (this->numerator*fraction.denominator)>=(this->denominator*fraction.numerator);
 }
 
-int& Rational::operator[](int index)
+/*int& Rational::operator[](int index)
 {
     if(index==0)
         return numerator;
     else if(index==1)
         return denominator;
-}
+}*/
 
-int Rational::getnumerator() const
+BigInt Rational::getnumerator() const
 {
     return numerator;
 }
 
-int Rational::getdenominator() const
+BigInt Rational::getdenominator() const
 {
     return denominator;
+}
+
 }
