@@ -17,7 +17,7 @@ namespace BigInt_Yo
         BigInt(); //default constructor
         //postcondition : the private member pointer bigInteger points to NULL. the private member length sets to 0.
 
-        BigInt(char arr[]);
+        //BigInt(char arr[]);
 
         BigInt(int integer); //constructor for integer
         //precondition : integer is an integer.
@@ -38,6 +38,8 @@ namespace BigInt_Yo
 
         char* getBigint();
 
+        int getSign();
+
         //int& operator [](int a);
 
         BigInt& operator =(const BigInt &rtSide); //assignment overloading
@@ -52,6 +54,8 @@ namespace BigInt_Yo
         //precondition : a and b are BigInt type object.
         //postcondition : return the result of a - b.
 
+        friend const BigInt operator -(const BigInt &a);
+
         friend const BigInt operator *(const BigInt &a, const BigInt &b);
 
         friend const BigInt operator /(const BigInt &a, const BigInt &b);
@@ -64,7 +68,7 @@ namespace BigInt_Yo
 
         friend istream& operator >>(istream& inputstream, BigInt& a);
 
-        friend const BigInt factorial(string factor);
+        const BigInt factorial(string factor);
 
         friend bool operator !=(const BigInt& a, const BigInt& b);
 
@@ -81,6 +85,7 @@ namespace BigInt_Yo
     private:
         char* bigInteger; //points to a dynamic array
         int length; //the length of an array bigInteger points to
+        int sign;
     };
 }
 
