@@ -81,13 +81,23 @@ namespace BigInt_Yo
 
     BigInt::BigInt(string stringOfNumber)
     {
-        length = strlen(stringOfNumber.c_str());
-        bigInteger = new char[length+1];
-        int n = 0;
-        for(;n<length;n++){
-            bigInteger[n] = stringOfNumber.c_str()[n];
+        if(stringOfNumber.c_str()[strlen(stringOfNumber.c_str())-1]=='!')
+        {
+            BigInt fac = factorial(stringOfNumber);
+            length = fac.getLength();
+            bigInteger = fac.getBigint();
         }
-        bigInteger[n] = '\0';
+        else
+        {
+            length = strlen(stringOfNumber.c_str());
+            bigInteger = new char[length+1];
+            int n = 0;
+            for(; n<length; n++)
+            {
+                bigInteger[n] = stringOfNumber.c_str()[n];
+            }
+            bigInteger[n] = '\0';
+        }
     }
 
     BigInt::~BigInt()
@@ -524,9 +534,9 @@ namespace BigInt_Yo
         }
     }
 
-    const BigInt factorial(string factor)
+    const BigInt BigInt::factorial(string factor)
     {
-        int l = strlen(factor.c_str());
+        int l = strlen(factor.c_str());//cout << l << endl;
         char cpytmp[l], cpy[l-1];
         strcpy(cpytmp, factor.c_str());
         int i = 0, j = 1;
@@ -535,11 +545,13 @@ namespace BigInt_Yo
             cpy[i] = cpytmp[i];
         }
         i = atoi(cpy);
-        BigInt tmp(1), result(1);
+        BigInt tmp(1), result(1);//cout<< i << " " << j <<endl;
         for(;j<=i;j++)
         {
-            BigInt tmp(j);
-            result = result * tmp;
+            BigInt *tmp = new BigInt(j);
+            result = result * (*tmp);
+            delete tmp;
+            tmp = NULL;
         }
         return BigInt(result);
     }
